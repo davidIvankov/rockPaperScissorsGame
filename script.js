@@ -78,6 +78,7 @@ round = (input) =>{
     return round(prompt(`rock paper scissors!\n(type rock, paper or scissors.)`))
    } else {
 
+
    let computerInput = computer_game();
    let res = player_game(input)[computerInput];
    currentGameCount++
@@ -85,11 +86,8 @@ round = (input) =>{
   if (res.message !== 'Draw' && res.value === 0){
     computerScore++
   }
-  if (currentGameCount < 4){
+  
   alert(`${res.message}\nplayer: ${input}\ncomputer:${computerInput}`)
-  }else {
-    return
-  }
 }
 },
 get_a_final_message = (scoreComp, scorePlayer) =>{
@@ -110,11 +108,11 @@ game = () =>{
   }
    finalResult = get_a_final_message(computerScore, playerScore);
    prompt(`${finalResult}\ncomputer:${computerScore}\nplayer:${playerScore}`);
-   return menu()
+   return menu('Next Round?\n(Type y for yes, n for no)')
 
 },
-menu = () =>{
-    let initialInput = prompt('Hi! I wona play a game of rock paper scissors\n(type y for yes, or n for no)')
+menu = (text) =>{
+    let initialInput = prompt(text)
     switch (initialInput){
         case 'y':
          game()
@@ -123,10 +121,10 @@ menu = () =>{
             alert('bye');
         break;
         default:
-        menu()
+        menu(text)
     }
 }
-menu()
+menu('Hi !\nWona play a game of rock paper scissors?\n(Type y for yes, n for no)')
 
 
 
