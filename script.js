@@ -1,6 +1,5 @@
-let playerScore = 0,
-computerScore = 0,
-currentGameCount = 0;
+let playerScore, computerScore, currentGameCount = 0,
+defaultMenuMessage = 'Hi !\nWona play a game of rock paper scissors?\n(Type y for yes, n for no)';
 
 const winMessage = 'You Won !!',
 lostMessage = ' You Lost :(',
@@ -108,7 +107,7 @@ game = () =>{
   }
    finalResult = get_a_final_message(computerScore, playerScore);
    prompt(`${finalResult}\ncomputer:${computerScore}\nplayer:${playerScore}`);
-   return menu('Next Round?\n(Type y for yes, n for no)')
+   return menu('Next Round?\n(Type y for yes, n for no, menu to go back to main menu)')
 
 },
 menu = (text) =>{
@@ -120,11 +119,13 @@ menu = (text) =>{
         case 'n':
             alert('bye');
         break;
+        case 'menu':
+            menu(defaultMenuMessage)
         default:
         menu(text)
     }
 }
-menu('Hi !\nWona play a game of rock paper scissors?\n(Type y for yes, n for no)')
+menu(defaultMenuMessage)
 
 
 
