@@ -1,2 +1,2 @@
 # rockPaperScissorsGame
-game at : https://github.io/davidIvankov/rockPaperScissorsGame/
+game at : https://davidivankov.github.io/rockPaperScissorsGame/
