@@ -1,8 +1,11 @@
 let playerScore, computerScore, currentGameCount = 0,
-defaultMenuMessage = 'Hi !\nWona play a game of rock paper scissors?\n(Type y for yes, n for no)';
+defaultMenuMessage = 'Hi !\nWona play a game of rock paper scissors?\n(Type y for yes, n for no)',
+meetingAnUser = 'Hi Stranger !\nWhat is your name?',
+userName;
 
 const winMessage = 'You Won !!',
 lostMessage = ' You Lost :(',
+nameRegex = /^[A-Za-z]+$/,
 rockRegex = /^rock$/i,
 paperRegex = /^paper$/i,
 scissorsRegex = /^scissors$/i,
@@ -72,7 +75,7 @@ player_game = (input) => {
         return false
     };
 },
-round = (input) =>{
+round = (input, name) =>{
     if (player_game(input) === false){
     return round(prompt(`rock paper scissors!\n(type rock, paper or scissors.)`))
    } else {
@@ -86,7 +89,7 @@ round = (input) =>{
     computerScore++
   }
   
-  alert(`${res.message}\nplayer: ${input}\ncomputer:${computerInput}`)
+  alert(`${res.message}\n${name}: ${input}\ncomputer:${computerInput}`)
 }
 },
 get_a_final_message = (scoreComp, scorePlayer) =>{
@@ -97,35 +100,47 @@ get_a_final_message = (scoreComp, scorePlayer) =>{
     } else {
         return 'Draw'
     }
-}
-game = () =>{
+},
+game = (name) =>{
     computerScore = 0;
     playerScore = 0;
   while (currentGameCount < 5){
     let playersInput = prompt('rock paper scissors!');
-    round(playersInput)
+    round(playersInput, name)
   }
    finalResult = get_a_final_message(computerScore, playerScore);
-   prompt(`${finalResult}\ncomputer:${computerScore}\nplayer:${playerScore}`);
+   prompt(`${finalResult}\ncomputer:${computerScore}\n${name}:${playerScore}`);
    return menu('Next Round?\n(Type y for yes, n for no, menu to go back to main menu)')
 
 },
-menu = (text) =>{
-    let initialInput = prompt(text)
-    switch (initialInput){
+set_name = (text) =>{
+    userName = prompt(text);
+    if (!userName || !nameRegex.test(userName)){
+        set_name(`${meetingAnUser}\n(that doesn't look like name to me, try again)`)
+    }
+    return userName;
+},
+menu_switch = (text, name) =>{
+    switch (text){
         case 'y':
-         game()
+         game(name)
         break;
         case 'n':
             alert('bye');
         break;
         case 'menu':
-            menu(defaultMenuMessage)
+            menu(meetingAnUser)
         default:
         menu(text)
     }
+
+},
+menu = (text) =>{
+   let user = set_name(text)
+    let initialInput = prompt(`Hi ${user}, good to see you!\nWona play rock paper scissors?\n(type y for yes,n for no)`);
+    menu_switch(initialInput);
 }
-menu(defaultMenuMessage)
+menu(meetingAnUser)
 
 
 
