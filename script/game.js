@@ -1,11 +1,13 @@
 //this is file whose code contains logic for the game
 let playerScore, computerScore, currentGameCount = 0,
+exit = false,
 allGamesLog = [],
 winner,
 finalResult;
 
 const rockRegex = /^rock$/i,
 paperRegex = /^paper$/i,
+exitRegex = /^exit$/i,
 scissorsRegex = /^scissors$/i;
 
 import { 
@@ -16,7 +18,7 @@ import {
     winMessage
 } from './gameObjects.js';
 
-import { menu, currGameCount } from './menu.js';
+import { menu, currGameCount, exit_function, ext } from './menu.js';
 
 // class that creates objects that will be exported to the logs.js
 class Score {
@@ -48,16 +50,19 @@ player_game = (input) => {
         return rockGame
     } else if (scissorsRegex.test(input)) {
         return scissorsGame
+    } else if (exitRegex.test(input)){
+        return 'exit'
     } else {
         return false
     };
 },
 round = (input, name) =>{
     if (player_game(input) === false){
-    return round(prompt(`rock paper scissors!\n(type rock, paper or scissors.)`))
+    return round(prompt(`rock paper scissors!\n(type rock, paper or scissors.)\n(type exit for exit :))`), name)
+   } else if (input === 'exit') {
+    currentGameCount = 5;
+    exit = true;
    } else {
-
-
    let computerInput = computer_game();
    let res = player_game(input)[computerInput];
    currentGameCount++
@@ -82,20 +87,24 @@ get_a_final_message = (scoreComp, scorePlayer, user) =>{
     }
 },
 game = (name) =>{
+    exit = ext;
     currentGameCount = currGameCount;
     computerScore = 0;
     playerScore = 0;
   while (currentGameCount < 5){
-    let playersInput = prompt('rock paper scissors!');
+    let playersInput = prompt('rock paper scissors!\n(exit)');
     round(playersInput, name)
   }
+  if (exit) {
+   return exit_function()
+  } else {
    finalResult = get_a_final_message(computerScore, playerScore, name);
    allGamesLog.unshift(new Score(name, computerScore, playerScore, winner))
    
-   prompt(`${finalResult}\ncomputer:${computerScore}\n${name}:${playerScore}`);
+   alert(`${finalResult}\ncomputer:${computerScore}\n${name}:${playerScore}`);
    return menu('')
-
+  };
 }
 
-export { game, finalResult, currentGameCount, allGamesLog }
+export { game, finalResult, currentGameCount, allGamesLog, exit }
 

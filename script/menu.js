@@ -1,12 +1,28 @@
  // this is the code that describes behavior of menu in the app, it servs as navigation
- import { game, finalResult, currentGameCount } from "./game.js";
+ import { game, finalResult, currentGameCount, exit } from "./game.js";
  import { meetingAnUser } from './script.js'
 
  let currGameCount = currentGameCount,
  finalRes = finalResult,
+ ext = exit,
  userName;
  
  const nameRegex = /^[A-Za-z]+$/,
+ exit_function = () => {
+    let answer = prompt('Are you shore?\nif you exit all logs will be lost and you can return only with page reload\n(type y for yes, n for no)')
+    switch (answer) {
+        case 'y':
+        return alert('bye')
+        break;
+        case 'n':
+         ext = false;   
+         menu('')
+        break;
+        default :
+        exit_function()
+        break;
+    }
+ },
  set_name = (text) =>{
     userName = prompt(text);
     if (!userName || !nameRegex.test(userName)){
@@ -20,10 +36,11 @@ menu_switch = (text, name) =>{
          game(name)
         break;
         case 'n':
-            alert('bye');
+         exit_function();
         break;
         default:
         menu(text)
+        break;
     }
 
 },
@@ -46,4 +63,4 @@ menu = (text) =>{
     };
 };
 
-export { menu, currGameCount }
+export { menu, currGameCount, exit_function, ext }
