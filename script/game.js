@@ -1,5 +1,7 @@
 //this is file whose code contains logic for the game
 let playerScore, computerScore, currentGameCount = 0,
+allGamesLog = [],
+winner,
 finalResult;
 
 const rockRegex = /^rock$/i,
@@ -15,6 +17,16 @@ import {
 } from './gameObjects.js';
 
 import { menu, currGameCount } from './menu.js';
+
+// class that creates objects that will be exported to the logs.js
+class Score {
+  constructor(user, compScore, userScore, winner) {
+    this.userName = user;
+    this.computerScore = compScore;
+    this.userScore = userScore;
+    this.winner = winner;
+  }
+}
 
 const computer_game = () =>{
     let randomValue = parseInt(Math.random() * 3);
@@ -57,12 +69,15 @@ round = (input, name) =>{
   alert(`${res.message}\n${name}: ${input}\ncomputer:${computerInput}`)
 }
 },
-get_a_final_message = (scoreComp, scorePlayer) =>{
+get_a_final_message = (scoreComp, scorePlayer, user) =>{
     if (scoreComp > scorePlayer) {
+        winner = 'computer';
         return lostMessage
     } else if (scoreComp < scorePlayer) {
+        winner = user;
         return winMessage
     } else {
+        winner = undefined;
         return 'Draw'
     }
 },
@@ -74,11 +89,13 @@ game = (name) =>{
     let playersInput = prompt('rock paper scissors!');
     round(playersInput, name)
   }
-   finalResult = get_a_final_message(computerScore, playerScore);
+   finalResult = get_a_final_message(computerScore, playerScore, name);
+   allGamesLog.unshift(new Score(name, computerScore, playerScore, winner))
+   
    prompt(`${finalResult}\ncomputer:${computerScore}\n${name}:${playerScore}`);
    return menu('')
 
 }
 
-export { game, finalResult, currentGameCount }
+export { game, finalResult, currentGameCount, allGamesLog }
 
