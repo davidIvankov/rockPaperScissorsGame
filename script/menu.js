@@ -1,6 +1,7 @@
  // this is the code that describes behavior of menu in the app, it servs as navigation
  import { game, finalResult, currentGameCount, exit } from "./game.js";
- import { meetingAnUser } from './script.js'
+ import { meetingAnUser } from './script.js';
+ import { logs } from "./logs.js";
 
  let currGameCount = currentGameCount,
  finalRes = finalResult,
@@ -37,10 +38,13 @@
 },
 
 menu_selection = (initialInput, name) =>{
-           if ((/y/i).test(initialInput)){
+           if ((/^y$/i).test(initialInput)){
             return game(name)
-           } else if ((/n/i).test(initialInput) || !initialInput) {
+           } else if ((/^n$/i).test(initialInput) || !initialInput) {
            return exit_function();
+           } else if ((/^logs$/i).test(initialInput)){
+            return logs();
+
            } else {
             menu('')
            };
@@ -49,7 +53,7 @@ menu_selection = (initialInput, name) =>{
  ask_for_a_game = (username) => {
     let initialInput;
     if (finalResult) {
-        initialInput = prompt(`Wanna play more ${username}?\n(type yes(y), OR no(n))`);
+        initialInput = prompt(`Wanna play more ${username}?\n(type yes(y), OR no(n), logs for all previus scores`);
         finalRes = 0;
         currGameCount = 0;
        return menu_selection(initialInput, username);

@@ -77,13 +77,13 @@ round = (input, name) =>{
 },
 get_a_final_message = (scoreComp, scorePlayer, user) =>{
     if (scoreComp > scorePlayer) {
-        winner = 'computer';
+        winner = 'winner is computer';
         return lostMessage
     } else if (scoreComp < scorePlayer) {
-        winner = user;
+        winner = `winner is ${user}`;
         return winMessage
     } else {
-        winner = undefined;
+        winner = 'Draw';
         return 'Draw'
     }
 },
@@ -100,6 +100,7 @@ game = (name) =>{
    return exit_function()
   } else {
    finalResult = get_a_final_message(computerScore, playerScore, name);
+   console.log(winner)
    allGamesLog.unshift(new Score(name, computerScore, playerScore, winner))
    
    alert(`${finalResult}\ncomputer:${computerScore}\n${name}:${playerScore}`);
