@@ -2,6 +2,7 @@
 let playerScore, computerScore, currentGameCount = 0,
 exit = false,
 allGamesLog = [],
+timeLeft = 10,
 winner,
 finalResult;
 

@@ -9,11 +9,11 @@
  
  const nameRegex = /^[A-Za-z]+$/,
  exit_function = () => {
-    let answer = prompt('Are you shore?\nif you exit all logs will be lost and you can return only with page reload\n(type y for yes, n for no)')
-    switch (answer) {
+    let answer = prompt('Are you sure?\n if you exit all logs will be lost and you can return only with page reload\n(type yes(y), OR no(no))')
+    switch (answer.toLowerCase()) {
         case 'y':
-        return alert('bye')
-        break;
+            alert('bye');
+            break;
         case 'n':
          ext = false;   
          menu('')
@@ -23,43 +23,53 @@
         break;
     }
  },
+
  set_name = (text) =>{
     userName = prompt(text);
-    if (!userName || !nameRegex.test(userName)){
-        set_name(`${meetingAnUser}\n(that doesn't look like name to me, try again)`)
+    if (!userName) {
+      return  exit_function();
     }
+    else if (!nameRegex.test(userName)){
+       return set_name(`${meetingAnUser}\n(that doesn't look like name to me, try again)`)
+    } else {
     return userName;
+    };
 },
-menu_switch = (text, name) =>{
-    switch (text){
-        case 'y':
-         game(name)
-        break;
-        case 'n':
-         exit_function();
-        break;
-        default:
-        menu(text)
-        break;
-    }
 
+menu_selection = (initialInput, name) =>{
+           if ((/y/i).test(initialInput)){
+            return game(name)
+           } else if ((/n/i).test(initialInput) || !initialInput) {
+           return exit_function();
+           } else {
+            menu('')
+           };
 },
- ask_for_a_game = (user) => {
+
+ ask_for_a_game = (username) => {
+    let initialInput;
     if (finalResult) {
-        let initialInput = prompt(`Wona play more ${user}?\n(type y for yes,n for no)`);
-    finalRes = 0;
-    currGameCount = 0;
-    menu_switch(initialInput, user);
-    }
-    let initialInput = prompt(`Hi ${user}, good to see you!\nWona play rock paper scissors?\n(type y for yes,n for no)`);
-    menu_switch(initialInput, user);
+        initialInput = prompt(`Wanna play more ${username}?\n(type yes(y), OR no(n))`);
+        finalRes = 0;
+        currGameCount = 0;
+       return menu_selection(initialInput, username);
+    } else {
+    initialInput = prompt(`Hi ${username}, good to see you!\Wanna play rock paper scissors?\n(type yes(y), for no(n))`);
+    menu_selection(initialInput, username);
+    };
 },
+
+
 menu = (text) =>{
     if (!userName) {
-   let user = set_name(text)
-   ask_for_a_game(user)
+        let user = set_name(text)
+        if (user) {
+        ask_for_a_game(user)
+        } else {
+            return;
+        }
     } else {
-    ask_for_a_game(userName);
+        ask_for_a_game(userName);
     };
 };
 
