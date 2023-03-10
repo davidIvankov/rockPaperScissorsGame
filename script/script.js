@@ -1,7 +1,7 @@
 //this is module file linked to the index.html
 import { menu } from './menu.js';
 
-let meetingAnUser = 'Hi Stranger !\nWhat is your name?';
+let meetingAnUser = '-------------------------------------------------------------------\nHi Stranger !\nWhat is your name?\n-------------------------------------------------------------------';
 
 menu(meetingAnUser);
 

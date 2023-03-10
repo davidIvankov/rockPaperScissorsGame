@@ -10,7 +10,7 @@
  
  const nameRegex = /^[A-Za-z]+$/,
  exit_function = () => {
-    let answer = prompt('Are you sure?\n if you exit all logs will be lost and you can return only with page reload\n(type yes(y), OR no(no))')
+    let answer = prompt('------------------------------------------------------------------\nAre you sure?\n if you exit all scores will be lost and you cant go back.\n--------------\ny\t(yes),\n n\t(no)\n------------------------------------------------------------------')
     switch (answer.toLowerCase()) {
         case 'y':
             alert('bye');
@@ -39,11 +39,11 @@
 
 menu_selection = (initialInput, name) =>{
            if ((/^y$/i).test(initialInput)){
-            return game(name)
+             game(name)
            } else if ((/^n$/i).test(initialInput) || !initialInput) {
-           return exit_function();
+            exit_function();
            } else if ((/^logs$/i).test(initialInput)){
-            return logs();
+             logs();
 
            } else {
             menu('')
@@ -53,12 +53,12 @@ menu_selection = (initialInput, name) =>{
  ask_for_a_game = (username) => {
     let initialInput;
     if (finalResult) {
-        initialInput = prompt(`Wanna play more ${username}?\n(type yes(y), OR no(n), logs for all previus scores`);
+        initialInput = prompt(`-------------------------------------------------------------------\nWanna play more ${username}?\n \t y(yes)\n \t n(no)\n----------\n logs for all previus scores\n-------------------------------------------------------------------`);
         finalRes = 0;
         currGameCount = 0;
        return menu_selection(initialInput, username);
     } else {
-    initialInput = prompt(`Hi ${username}, good to see you!\Wanna play rock paper scissors?\n(type yes(y), for no(n))`);
+    initialInput = prompt(`-------------------------------------------------------------------\nHi ${username}, good to see you!\nWanna play rock paper scissors?\n---------------------------------\ny\t(yes)\nn\t(no)\n-------------------------------------------------------------------`);
     menu_selection(initialInput, username);
     };
 },

@@ -3,47 +3,47 @@ this file contains three objects which are used when player selects rock, paper 
 Then computer generates one of the three options which serve as keys to access message displayed
  on screene and value added to a playerScore, which are all stored in these objects.
 */
-const winMessage = 'You Won !!',
-lostMessage = ' You Lost :(',
+const winMessage = '-------------------------------------------------------------------\ncongratulations you Won!\n',
+lostMessage = '-------------------------------------------------------------------\nSorry You Lost!',
 paperGame = {
     rock: {
-        message:`${winMessage}\n paper beats rock.`,
+        message:`${winMessage}\n\t paper beats rock.`,
         value: 1
     },
     paper: {
-        message:`Draw`,
+        message:`\t Draw`,
         value: 0
     },
     scissors: {
-        message:`${lostMessage}\n scissors beat paper.`,
+        message:`${lostMessage}\n\t scissors beat paper.`,
         value: 0
     }
 },
 scissorsGame = {
     rock: {
-        message:`${lostMessage}\n rock beats scissors.`,
+        message:`${lostMessage}\n\t rock beats scissors.`,
         value: 0
     },
     scissors: {
-        message:`Draw`,
+        message:`\t Draw`,
         value: 0
     },
     paper: {
-        message:`${winMessage}\n scissors beat paper.`,
+        message:`${winMessage}\n\t scissors beat paper.`,
         value: 1
     }
 },
 rockGame = {
     scissors: {
-        message:`${winMessage}\n rock beats scissors.`,
+        message:`${winMessage}\n\t rock beats scissors.`,
         value: 1
     },
     rock: { 
-        message:`Draw`,
+        message:`\t Draw`,
         value: 0
     },
     paper: {
-        message:`${lostMessage}\n paper beats rock.`,
+        message:`${lostMessage}\n\t paper beats rock.`,
         value: 0
     }
 }

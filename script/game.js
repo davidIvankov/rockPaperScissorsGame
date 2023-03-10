@@ -59,7 +59,7 @@ player_game = (input) => {
 },
 round = (input, name) =>{
     if (player_game(input) === false){
-    return round(prompt(`rock paper scissors!\n(type rock, paper or scissors.)\n(type exit for exit :))`), name)
+    return round(prompt(`-------------------------------------------------------------------\nYou have only the below option\n\t rock\n\t paper\n\t scissors\nEXIT THE GAME\n\t exit`), name)
    } else if (input === 'exit') {
     currentGameCount = 5;
     exit = true;
@@ -72,7 +72,7 @@ round = (input, name) =>{
     computerScore++
   }
   
-  alert(`${res.message}\n${name}: ${input}\ncomputer:${computerInput}`)
+  alert(` ${res.message}\n\n-----------------\n${name}: ${input}\ncomputer: ${computerInput}\n-------------------------------------------------------------------`)
 }
 },
 get_a_final_message = (scoreComp, scorePlayer, user) =>{
@@ -93,7 +93,7 @@ game = (name) =>{
     computerScore = 0;
     playerScore = 0;
   while (currentGameCount < 5){
-    let playersInput = prompt('rock paper scissors!\n(exit)');
+    let playersInput = prompt('-----------------------------------------------------------------\nType one of the option below\n--------------\n\t rock\n\t paper\n\t scissors\n--------------\n\t exit--Exit game!\n-----------------------------------------------------------------');
     round(playersInput, name)
   }
   if (exit) {
@@ -103,7 +103,7 @@ game = (name) =>{
    console.log(winner)
    allGamesLog.unshift(new Score(name, computerScore, playerScore, winner))
    
-   alert(`${finalResult}\ncomputer:${computerScore}\n${name}:${playerScore}`);
+   alert(` ${finalResult}\ncomputer: ${computerScore}\n${name}: ${playerScore}\n-----------------------------------------------------------------`);
    return menu('')
   };
 }
