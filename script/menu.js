@@ -53,12 +53,12 @@ menu_selection = (initialInput, name) =>{
  ask_for_a_game = (username) => {
     let initialInput;
     if (finalResult) {
-        initialInput = prompt(`-------------------------------------------------------------------\nWanna play more ${username}?\n \t y(yes)\n \t n(no)\n----------\n logs for all previus scores\n-------------------------------------------------------------------`);
+        initialInput = prompt(`-------------------------------------------------------------------\nWanna play more ${username}?\n \t y(yes)\n \t n(no)\n\t logs(for all previus scores)\n-------------------------------------------------------------------`);
         finalRes = 0;
-        currGameCount = 1;
+        currGameCount = 0;
        return menu_selection(initialInput, username);
     } else {
-    initialInput = prompt(`-------------------------------------------------------------------\nHi ${username}, good to see you!\nWanna play rock paper scissors?\n---------------------------------\ny\t(yes)\nn\t(no)\n-------------------------------------------------------------------`);
+    initialInput = prompt(`-------------------------------------------------------------------\nHi ${username}, good to see you!\nWanna play rock paper scissors?\n---------------------\ny\t(yes)\nn\t(no)\n-------------------------------------------------------------------`);
     menu_selection(initialInput, username);
     };
 },
@@ -68,9 +68,7 @@ menu = (text) =>{
     if (!userName) {
         let user = set_name(text)
         if (user) {
-        ask_for_a_game(user)
-        } else {
-            return;
+            ask_for_a_game(user)
         }
     } else {
         ask_for_a_game(userName);

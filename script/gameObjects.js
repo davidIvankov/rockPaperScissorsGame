@@ -3,8 +3,8 @@ this file contains three objects which are used when player selects rock, paper 
 Then computer generates one of the three options which serve as keys to access message displayed
  on screene and value added to a playerScore, which are all stored in these objects.
 */
-const winMessage = '-------------------------------------------------------------------\ncongratulations you Won!\n',
-lostMessage = '-------------------------------------------------------------------\nSorry You Lost!',
+const winMessage = '-----------------------------------------------------------------\nCongratulations you Won!\n',
+lostMessage = '-----------------------------------------------------------------\nSorry You Lost!',
 paperGame = {
     rock: {
         message:`${winMessage}\n\t paper beats rock.`,
