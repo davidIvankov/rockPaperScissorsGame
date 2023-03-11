@@ -17,7 +17,7 @@
             break;
         case 'n':
          ext = false;   
-         menu('')
+         menu(meetingAnUser)
         break;
         default :
         exit_function()
